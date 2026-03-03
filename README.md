@@ -1,12 +1,12 @@
-projects
-├── README.md                        
-├── Shampoo-Sentiment-Analysis/      
+Portfolio-Repository/
+├── README.md
+├── Shampoo-Sentiment-Analysis/
 │   ├── compose.yaml
 │   ├── sql/
 │   ├── notebooks/
 │   ├── logs/
 │   ├── requirements.txt
-│   └── README.md                    
+│   └── README.md
 └── E-Commerce-DMS/
-    ├── README.md
-    ├── e_commerce_database.sql
+    ├── e_commerce_database
+    └── README.md
