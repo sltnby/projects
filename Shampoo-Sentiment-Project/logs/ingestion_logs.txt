@@ -1,0 +1,573 @@
+Last login: Sat Feb  7 15:54:57 on ttys000
+segahaltunbey@Mac ~ % cd /Users/segahaltunbey/Documents/Documents\ -\ Segah’s\ MacBook\ Air/Data\ Analysis/Big\ Data\ Analytics/welcome-to-docker/multi-container-app
+segahaltunbey@Mac multi-container-app % docker compose up -d
+WARN[0000] /Users/segahaltunbey/Documents/Documents - Segah’s MacBook Air/Data Analysis/Big Data Analytics/welcome-to-docker/multi-container-app/compose.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+WARN[0000] No services to build                         
+[+] up 7/7
+ ✔ Container namenode          Running                                     0.0s 
+ ✔ Container hive-metastore-db Running                                     0.0s 
+ ✔ Container datanode3         Running                                     0.0s 
+ ✔ Container datanode2         Running                                     0.0s 
+ ✔ Container datanode1         Running                                     0.0s 
+ ✔ Container hive-metastore    Running                                     0.0s 
+ ✔ Container hive-server       Running                                     0.0s 
+segahaltunbey@Mac multi-container-app % docker compose down -v
+WARN[0000] /Users/segahaltunbey/Documents/Documents - Segah’s MacBook Air/Data Analysis/Big Data Analytics/welcome-to-docker/multi-container-app/compose.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] down 13/13
+ ✔ Container hive-server                        Removed                    1.4s 
+ ✔ Container hive-metastore                     Removed                    0.7s 
+ ✔ Container datanode2                          Removed                    1.4s 
+ ✔ Container datanode3                          Removed                    1.4s 
+ ✔ Container hive-metastore-db                  Removed                    0.1s 
+ ✔ Container datanode1                          Removed                    1.1s 
+ ✔ Container namenode                           Removed                    1.3s 
+ ✔ Volume multi-container-app_hadoop_datanode_3 Removed                    0.3s 
+ ✔ Volume multi-container-app_hadoop_datanode_2 Removed                    0.1s 
+ ✔ Network multi-container-app_bigdata-net      Removed                    0.2s 
+ ✔ Volume multi-container-app_db_data           Removed                    0.0s 
+ ✔ Volume multi-container-app_hadoop_namenode   Removed                    0.3s 
+ ✔ Volume multi-container-app_hadoop_datanode_1 Removed                    0.3s 
+segahaltunbey@Mac multi-container-app % docker compose up -d
+WARN[0000] /Users/segahaltunbey/Documents/Documents - Segah’s MacBook Air/Data Analysis/Big Data Analytics/welcome-to-docker/multi-container-app/compose.yaml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+WARN[0000] No services to build                         
+[+] up 13/13
+ ✔ Network multi-container-app_bigdata-net      Created                                                                                                                                                   0.0s 
+ ✔ Volume multi-container-app_db_data           Created                                                                                                                                                   0.0s 
+ ✔ Volume multi-container-app_hadoop_namenode   Created                                                                                                                                                   0.0s 
+ ✔ Volume multi-container-app_hadoop_datanode_1 Created                                                                                                                                                   0.0s 
+ ✔ Volume multi-container-app_hadoop_datanode_2 Created                                                                                                                                                   0.0s 
+ ✔ Volume multi-container-app_hadoop_datanode_3 Created                                                                                                                                                   0.0s 
+ ✔ Container namenode                           Created                                                                                                                                                   0.0s 
+ ✔ Container hive-metastore-db                  Created                                                                                                                                                   0.0s 
+ ✔ Container hive-metastore                     Created                                                                                                                                                   0.1s 
+ ✔ Container datanode3                          Created                                                                                                                                                   0.1s 
+ ✔ Container datanode2                          Created                                                                                                                                                   0.0s 
+ ✔ Container datanode1                          Created                                                                                                                                                   0.0s 
+ ✔ Container hive-server                        Created                                                                                                                                                   0.0s 
+segahaltunbey@Mac multi-container-app % docker cp Beauty_and_Personal_Care.jsonl namenode:/tmp/
+Successfully copied 11GB to namenode:/tmp/
+segahaltunbey@Mac multi-container-app % docker cp meta_Beauty_and_Personal_Care.jsonl namenode:/tmp/
+Successfully copied 2.84GB to namenode:/tmp/
+segahaltunbey@Mac multi-container-app % docker exec -it namenode bash
+root@namenode:/# hdfs dfs -put /tmp/Beauty_and_Personal_Care.jsonl /input/beauty/
+put: `/input/beauty/': No such file or directory: `hdfs://namenode:9000/input/beauty'
+root@namenode:/# hdfs dfs -mkdir -p /input/beauty/
+root@namenode:/# hdfs dfs -put /tmp/Beauty_and_Personal_Care.jsonl /input/beauty/
+2026-02-07 15:12:50,213 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:51,263 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:51,911 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:52,459 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:52,930 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:53,336 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:53,778 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:54,170 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:54,591 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:55,007 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:55,377 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:55,665 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:56,063 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:56,370 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:56,739 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:57,049 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:57,483 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:57,817 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:58,283 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:58,491 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:58,967 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:59,186 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:59,648 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:12:59,954 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:00,293 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:00,636 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:01,024 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:02,403 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:02,854 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:03,167 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:03,604 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:03,897 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:04,113 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:04,609 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:04,826 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:05,316 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:05,615 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:05,941 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:06,352 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:06,627 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:06,967 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:07,363 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:07,832 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:08,413 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:08,609 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:08,952 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:09,316 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:09,707 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:10,131 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:10,467 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:10,871 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:12,087 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:12,735 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:15,528 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:17,348 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:19,016 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:22,297 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:23,897 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:25,797 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:28,940 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:30,030 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:33,108 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:37,365 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:37,930 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:40,908 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:41,590 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:44,298 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:45,556 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:48,097 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:49,235 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:50,998 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:54,645 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:55,421 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:57,527 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:13:59,002 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:14:01,449 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:14:04,511 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:14:05,925 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:14:07,352 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:14:08,750 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:14:12,585 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:14:14,099 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:14:16,340 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+root@namenode:/# hdfs dfs -put /tmp/meta_Beauty_and_Personal_Care.jsonl /input/beauty/
+2026-02-07 15:15:03,099 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:03,447 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:03,905 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:04,382 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:04,789 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:05,105 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:05,964 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:06,117 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:06,694 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:06,905 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:07,402 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:07,671 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:08,062 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:08,560 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:09,306 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:09,603 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:10,834 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:12,398 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:13,501 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:16,452 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:16,926 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+2026-02-07 15:15:19,982 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+root@namenode:/# hdfs fsck /input/beauty/Beauty_and_Personal_Care.jsonl -files -blocks -locations
+Connecting to namenode via http://namenode:9870/fsck?ugi=root&files=1&blocks=1&locations=1&path=%2Finput%2Fbeauty%2FBeauty_and_Personal_Care.jsonl
+FSCK started by root (auth:SIMPLE) from /172.18.0.2 for path /input/beauty/Beauty_and_Personal_Care.jsonl at Sat Feb 07 15:16:43 UTC 2026
+/input/beauty/Beauty_and_Personal_Care.jsonl 11021458876 bytes, replicated: replication=3, 83 block(s):  OK
+0. BP-608857930-172.18.0.2-1770476302951:blk_1073741825_1001 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+1. BP-608857930-172.18.0.2-1770476302951:blk_1073741826_1002 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+2. BP-608857930-172.18.0.2-1770476302951:blk_1073741827_1003 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+3. BP-608857930-172.18.0.2-1770476302951:blk_1073741828_1004 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+4. BP-608857930-172.18.0.2-1770476302951:blk_1073741829_1005 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+5. BP-608857930-172.18.0.2-1770476302951:blk_1073741830_1006 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+6. BP-608857930-172.18.0.2-1770476302951:blk_1073741831_1007 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+7. BP-608857930-172.18.0.2-1770476302951:blk_1073741832_1008 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+8. BP-608857930-172.18.0.2-1770476302951:blk_1073741833_1009 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+9. BP-608857930-172.18.0.2-1770476302951:blk_1073741834_1010 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+10. BP-608857930-172.18.0.2-1770476302951:blk_1073741835_1011 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+11. BP-608857930-172.18.0.2-1770476302951:blk_1073741836_1012 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+12. BP-608857930-172.18.0.2-1770476302951:blk_1073741837_1013 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+13. BP-608857930-172.18.0.2-1770476302951:blk_1073741838_1014 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+14. BP-608857930-172.18.0.2-1770476302951:blk_1073741839_1015 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+15. BP-608857930-172.18.0.2-1770476302951:blk_1073741840_1016 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+16. BP-608857930-172.18.0.2-1770476302951:blk_1073741841_1017 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+17. BP-608857930-172.18.0.2-1770476302951:blk_1073741842_1018 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+18. BP-608857930-172.18.0.2-1770476302951:blk_1073741843_1019 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+19. BP-608857930-172.18.0.2-1770476302951:blk_1073741844_1020 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+20. BP-608857930-172.18.0.2-1770476302951:blk_1073741845_1021 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+21. BP-608857930-172.18.0.2-1770476302951:blk_1073741846_1022 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+22. BP-608857930-172.18.0.2-1770476302951:blk_1073741847_1023 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+23. BP-608857930-172.18.0.2-1770476302951:blk_1073741848_1024 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+24. BP-608857930-172.18.0.2-1770476302951:blk_1073741849_1025 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+25. BP-608857930-172.18.0.2-1770476302951:blk_1073741850_1026 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+26. BP-608857930-172.18.0.2-1770476302951:blk_1073741851_1027 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+27. BP-608857930-172.18.0.2-1770476302951:blk_1073741852_1028 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+28. BP-608857930-172.18.0.2-1770476302951:blk_1073741853_1029 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+29. BP-608857930-172.18.0.2-1770476302951:blk_1073741854_1030 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+30. BP-608857930-172.18.0.2-1770476302951:blk_1073741855_1031 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+31. BP-608857930-172.18.0.2-1770476302951:blk_1073741856_1032 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+32. BP-608857930-172.18.0.2-1770476302951:blk_1073741857_1033 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+33. BP-608857930-172.18.0.2-1770476302951:blk_1073741858_1034 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+34. BP-608857930-172.18.0.2-1770476302951:blk_1073741859_1035 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+35. BP-608857930-172.18.0.2-1770476302951:blk_1073741860_1036 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+36. BP-608857930-172.18.0.2-1770476302951:blk_1073741861_1037 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+37. BP-608857930-172.18.0.2-1770476302951:blk_1073741862_1038 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+38. BP-608857930-172.18.0.2-1770476302951:blk_1073741863_1039 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+39. BP-608857930-172.18.0.2-1770476302951:blk_1073741864_1040 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+40. BP-608857930-172.18.0.2-1770476302951:blk_1073741865_1041 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+41. BP-608857930-172.18.0.2-1770476302951:blk_1073741866_1042 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+42. BP-608857930-172.18.0.2-1770476302951:blk_1073741867_1043 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+43. BP-608857930-172.18.0.2-1770476302951:blk_1073741868_1044 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+44. BP-608857930-172.18.0.2-1770476302951:blk_1073741869_1045 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+45. BP-608857930-172.18.0.2-1770476302951:blk_1073741870_1046 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+46. BP-608857930-172.18.0.2-1770476302951:blk_1073741871_1047 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+47. BP-608857930-172.18.0.2-1770476302951:blk_1073741872_1048 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+48. BP-608857930-172.18.0.2-1770476302951:blk_1073741873_1049 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+49. BP-608857930-172.18.0.2-1770476302951:blk_1073741874_1050 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+50. BP-608857930-172.18.0.2-1770476302951:blk_1073741875_1051 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+51. BP-608857930-172.18.0.2-1770476302951:blk_1073741876_1052 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+52. BP-608857930-172.18.0.2-1770476302951:blk_1073741877_1053 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+53. BP-608857930-172.18.0.2-1770476302951:blk_1073741878_1054 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+54. BP-608857930-172.18.0.2-1770476302951:blk_1073741879_1055 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+55. BP-608857930-172.18.0.2-1770476302951:blk_1073741880_1056 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+56. BP-608857930-172.18.0.2-1770476302951:blk_1073741881_1057 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+57. BP-608857930-172.18.0.2-1770476302951:blk_1073741882_1058 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+58. BP-608857930-172.18.0.2-1770476302951:blk_1073741883_1059 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+59. BP-608857930-172.18.0.2-1770476302951:blk_1073741884_1060 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+60. BP-608857930-172.18.0.2-1770476302951:blk_1073741885_1061 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+61. BP-608857930-172.18.0.2-1770476302951:blk_1073741886_1062 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+62. BP-608857930-172.18.0.2-1770476302951:blk_1073741887_1063 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+63. BP-608857930-172.18.0.2-1770476302951:blk_1073741888_1064 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+64. BP-608857930-172.18.0.2-1770476302951:blk_1073741889_1065 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+65. BP-608857930-172.18.0.2-1770476302951:blk_1073741890_1066 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+66. BP-608857930-172.18.0.2-1770476302951:blk_1073741891_1067 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+67. BP-608857930-172.18.0.2-1770476302951:blk_1073741892_1068 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+68. BP-608857930-172.18.0.2-1770476302951:blk_1073741893_1069 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+69. BP-608857930-172.18.0.2-1770476302951:blk_1073741894_1070 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+70. BP-608857930-172.18.0.2-1770476302951:blk_1073741895_1071 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+71. BP-608857930-172.18.0.2-1770476302951:blk_1073741896_1072 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+72. BP-608857930-172.18.0.2-1770476302951:blk_1073741897_1073 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+73. BP-608857930-172.18.0.2-1770476302951:blk_1073741898_1074 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+74. BP-608857930-172.18.0.2-1770476302951:blk_1073741899_1075 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+75. BP-608857930-172.18.0.2-1770476302951:blk_1073741900_1076 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+76. BP-608857930-172.18.0.2-1770476302951:blk_1073741901_1077 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+77. BP-608857930-172.18.0.2-1770476302951:blk_1073741902_1078 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+78. BP-608857930-172.18.0.2-1770476302951:blk_1073741903_1079 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+79. BP-608857930-172.18.0.2-1770476302951:blk_1073741904_1080 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+80. BP-608857930-172.18.0.2-1770476302951:blk_1073741905_1081 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+81. BP-608857930-172.18.0.2-1770476302951:blk_1073741906_1082 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+82. BP-608857930-172.18.0.2-1770476302951:blk_1073741907_1083 len=15605180 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+
+
+Status: HEALTHY
+ Number of data-nodes:	3
+ Number of racks:		1
+ Total dirs:			0
+ Total symlinks:		0
+
+Replicated Blocks:
+ Total size:	11021458876 B
+ Total files:	1
+ Total blocks (validated):	83 (avg. block size 132788661 B)
+ Minimally replicated blocks:	83 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	3
+ Average block replication:	3.0
+ Missing blocks:		0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+
+Erasure Coded Block Groups:
+ Total size:	0 B
+ Total files:	0
+ Total block groups (validated):	0
+ Minimally erasure-coded block groups:	0
+ Over-erasure-coded block groups:	0
+ Under-erasure-coded block groups:	0
+ Unsatisfactory placement block groups:	0
+ Average block group size:	0.0
+ Missing block groups:		0
+ Corrupt block groups:		0
+ Missing internal blocks:	0
+FSCK ended at Sat Feb 07 15:16:43 UTC 2026 in 16 milliseconds
+
+
+The filesystem under path '/input/beauty/Beauty_and_Personal_Care.jsonl' is HEALTHY
+root@namenode:/# hdfs fsck /input/beauty/meta_Beauty_and_Personal_Care.jsonl -files -blocks -locations
+Connecting to namenode via http://namenode:9870/fsck?ugi=root&files=1&blocks=1&locations=1&path=%2Finput%2Fbeauty%2Fmeta_Beauty_and_Personal_Care.jsonl
+FSCK started by root (auth:SIMPLE) from /172.18.0.2 for path /input/beauty/meta_Beauty_and_Personal_Care.jsonl at Sat Feb 07 15:17:12 UTC 2026
+/input/beauty/meta_Beauty_and_Personal_Care.jsonl 2835194976 bytes, replicated: replication=3, 22 block(s):  OK
+0. BP-608857930-172.18.0.2-1770476302951:blk_1073741908_1084 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+1. BP-608857930-172.18.0.2-1770476302951:blk_1073741909_1085 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+2. BP-608857930-172.18.0.2-1770476302951:blk_1073741910_1086 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+3. BP-608857930-172.18.0.2-1770476302951:blk_1073741911_1087 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+4. BP-608857930-172.18.0.2-1770476302951:blk_1073741912_1088 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+5. BP-608857930-172.18.0.2-1770476302951:blk_1073741913_1089 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+6. BP-608857930-172.18.0.2-1770476302951:blk_1073741914_1090 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+7. BP-608857930-172.18.0.2-1770476302951:blk_1073741915_1091 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+8. BP-608857930-172.18.0.2-1770476302951:blk_1073741916_1092 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+9. BP-608857930-172.18.0.2-1770476302951:blk_1073741917_1093 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+10. BP-608857930-172.18.0.2-1770476302951:blk_1073741918_1094 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+11. BP-608857930-172.18.0.2-1770476302951:blk_1073741919_1095 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+12. BP-608857930-172.18.0.2-1770476302951:blk_1073741920_1096 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+13. BP-608857930-172.18.0.2-1770476302951:blk_1073741921_1097 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+14. BP-608857930-172.18.0.2-1770476302951:blk_1073741922_1098 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+15. BP-608857930-172.18.0.2-1770476302951:blk_1073741923_1099 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+16. BP-608857930-172.18.0.2-1770476302951:blk_1073741924_1100 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK]]
+17. BP-608857930-172.18.0.2-1770476302951:blk_1073741925_1101 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+18. BP-608857930-172.18.0.2-1770476302951:blk_1073741926_1102 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK], DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK]]
+19. BP-608857930-172.18.0.2-1770476302951:blk_1073741927_1103 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+20. BP-608857930-172.18.0.2-1770476302951:blk_1073741928_1104 len=134217728 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+21. BP-608857930-172.18.0.2-1770476302951:blk_1073741929_1105 len=16622688 Live_repl=3  [DatanodeInfoWithStorage[172.18.0.4:9866,DS-5212bc17-ad50-4a59-b292-c835b3437589,DISK], DatanodeInfoWithStorage[172.18.0.6:9866,DS-29b107d8-24fb-41df-a77b-947dd73c7774,DISK], DatanodeInfoWithStorage[172.18.0.5:9866,DS-6c1a8c00-30e2-4f2a-9491-5297c5e640f0,DISK]]
+
+
+Status: HEALTHY
+ Number of data-nodes:	3
+ Number of racks:		1
+ Total dirs:			0
+ Total symlinks:		0
+
+Replicated Blocks:
+ Total size:	2835194976 B
+ Total files:	1
+ Total blocks (validated):	22 (avg. block size 128872498 B)
+ Minimally replicated blocks:	22 (100.0 %)
+ Over-replicated blocks:	0 (0.0 %)
+ Under-replicated blocks:	0 (0.0 %)
+ Mis-replicated blocks:		0 (0.0 %)
+ Default replication factor:	3
+ Average block replication:	3.0
+ Missing blocks:		0
+ Corrupt blocks:		0
+ Missing replicas:		0 (0.0 %)
+
+Erasure Coded Block Groups:
+ Total size:	0 B
+ Total files:	0
+ Total block groups (validated):	0
+ Minimally erasure-coded block groups:	0
+ Over-erasure-coded block groups:	0
+ Under-erasure-coded block groups:	0
+ Unsatisfactory placement block groups:	0
+ Average block group size:	0.0
+ Missing block groups:		0
+ Corrupt block groups:		0
+ Missing internal blocks:	0
+FSCK ended at Sat Feb 07 15:17:12 UTC 2026 in 4 milliseconds
+
+
+The filesystem under path '/input/beauty/meta_Beauty_and_Personal_Care.jsonl' is HEALTHY
+root@namenode:/# exit
+exit
+segahaltunbey@Mac multi-container-app % docker exec -it hive-server hive
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/opt/hive/lib/log4j-slf4j-impl-2.6.2.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop-2.7.4/share/hadoop/common/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.apache.logging.slf4j.Log4jLoggerFactory]
+
+Logging initialized using configuration in file:/opt/hive/conf/hive-log4j2.properties Async: true
+Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+hive> DROP VIEW IF EXISTS reviews;
+OK
+Time taken: 0.733 seconds
+hive> DROP TABLE IF EXISTS reviews_raw;
+OK
+Time taken: 0.027 seconds
+hive> DROP VIEW IF EXISTS products;
+OK
+Time taken: 0.037 seconds
+hive> DROP TABLE IF EXISTS meta_raw;
+OK
+Time taken: 0.036 seconds
+hive> DROP TABLE IF EXISTS reviews_serde;
+OK
+Time taken: 0.041 seconds
+hive> DROP TABLE IF EXISTS products_serde;
+OK
+Time taken: 0.034 seconds
+hive> CREATE TABLE reviews_serde (
+    >   parent_asin STRING,
+    >   rating FLOAT,
+    >   title STRING,
+    >   text STRING,
+    >   user_id STRING,
+    >   timestamp BIGINT,
+    >   verified_purchase BOOLEAN,
+    >   helpful_vote INT
+    > )
+    > ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+    > STORED AS TEXTFILE;
+NoViableAltException(287@[])
+	at org.apache.hadoop.hive.ql.parse.HiveParser.columnNameTypeOrPKOrFK(HiveParser.java:33341)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.columnNameTypeOrPKOrFKList(HiveParser.java:29513)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.createTableStatement(HiveParser.java:6175)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.ddlStatement(HiveParser.java:3808)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.execStatement(HiveParser.java:2382)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.statement(HiveParser.java:1333)
+	at org.apache.hadoop.hive.ql.parse.ParseDriver.parse(ParseDriver.java:208)
+	at org.apache.hadoop.hive.ql.parse.ParseUtils.parse(ParseUtils.java:77)
+	at org.apache.hadoop.hive.ql.parse.ParseUtils.parse(ParseUtils.java:70)
+	at org.apache.hadoop.hive.ql.Driver.compile(Driver.java:468)
+	at org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1317)
+	at org.apache.hadoop.hive.ql.Driver.runInternal(Driver.java:1457)
+	at org.apache.hadoop.hive.ql.Driver.run(Driver.java:1237)
+	at org.apache.hadoop.hive.ql.Driver.run(Driver.java:1227)
+	at org.apache.hadoop.hive.cli.CliDriver.processLocalCmd(CliDriver.java:233)
+	at org.apache.hadoop.hive.cli.CliDriver.processCmd(CliDriver.java:184)
+	at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:403)
+	at org.apache.hadoop.hive.cli.CliDriver.executeDriver(CliDriver.java:821)
+	at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:759)
+	at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:686)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+FAILED: ParseException line 7:2 cannot recognize input near 'timestamp' 'BIGINT' ',' in column name or primary key or foreign key
+hive> CREATE TABLE reviews_serde (
+    >     >   parent_asin STRING,
+    >     >   rating FLOAT,
+    >     >   title STRING,
+    >     >   text STRING,
+    >     >   user_id STRING,
+    >     >   timestamp BIGINT,
+    >     >   verified_purchase BOOLEAN,
+    >     >   helpful_vote INT
+    >     > )
+    >     > ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+    > ;
+NoViableAltException(21@[])
+	at org.apache.hadoop.hive.ql.parse.HiveParser.columnNameTypeOrPKOrFK(HiveParser.java:33341)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.columnNameTypeOrPKOrFKList(HiveParser.java:29492)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.createTableStatement(HiveParser.java:6175)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.ddlStatement(HiveParser.java:3808)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.execStatement(HiveParser.java:2382)
+	at org.apache.hadoop.hive.ql.parse.HiveParser.statement(HiveParser.java:1333)
+	at org.apache.hadoop.hive.ql.parse.ParseDriver.parse(ParseDriver.java:208)
+	at org.apache.hadoop.hive.ql.parse.ParseUtils.parse(ParseUtils.java:77)
+	at org.apache.hadoop.hive.ql.parse.ParseUtils.parse(ParseUtils.java:70)
+	at org.apache.hadoop.hive.ql.Driver.compile(Driver.java:468)
+	at org.apache.hadoop.hive.ql.Driver.compileInternal(Driver.java:1317)
+	at org.apache.hadoop.hive.ql.Driver.runInternal(Driver.java:1457)
+	at org.apache.hadoop.hive.ql.Driver.run(Driver.java:1237)
+	at org.apache.hadoop.hive.ql.Driver.run(Driver.java:1227)
+	at org.apache.hadoop.hive.cli.CliDriver.processLocalCmd(CliDriver.java:233)
+	at org.apache.hadoop.hive.cli.CliDriver.processCmd(CliDriver.java:184)
+	at org.apache.hadoop.hive.cli.CliDriver.processLine(CliDriver.java:403)
+	at org.apache.hadoop.hive.cli.CliDriver.executeDriver(CliDriver.java:821)
+	at org.apache.hadoop.hive.cli.CliDriver.run(CliDriver.java:759)
+	at org.apache.hadoop.hive.cli.CliDriver.main(CliDriver.java:686)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:136)
+FAILED: ParseException line 2:4 cannot recognize input near '>' 'parent_asin' 'STRING' in column name or primary key or foreign key
+hive> CREATE TABLE reviews_serde(
+    > parent_asin STRING,
+    > rating FLOAT,
+    > title STRING,
+    > text STRING,
+    > user_id STRING,
+    > `timestamp` BIGINT,
+    > verified_purchase BOOLEAN,
+    > helpful_vote INT
+    > )
+    > ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+    > STORED AS TEXTFILE;
+OK
+Time taken: 0.629 seconds
+hive> LOAD DATA INPATH '/input/beauty/Beauty_and_Personal_Care.jsonl' OVERWRITE INTO TABLE reviews_serde;
+Loading data to table default.reviews_serde
+OK
+Time taken: 1.084 seconds
+hive> CREATE TABLE products_serde (
+    >   parent_asin STRING,
+    >   title STRING,
+    >   main_category STRING,
+    >   average_rating FLOAT,
+    >   rating_number INT,
+    >   price FLOAT,
+    >   store STRING,
+    >   features ARRAY<STRING>,
+    >   description ARRAY<STRING>,
+    >   categories ARRAY<STRING>,
+    >   details MAP<STRING, STRING>,
+    >   bought_together ARRAY<STRING>
+    > )
+    > ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+    > STORED AS TEXTFILE;
+OK
+Time taken: 0.141 seconds
+hive> LOAD DATA INPATH '/input/beauty/meta_Beauty_and_Personal_Care.jsonl' OVERWRITE INTO TABLE products_serde;
+Loading data to table default.products_serde
+OK
+Time taken: 0.528 seconds
+hive> SELECT
+    > p.parent_asin,
+    > p.title,
+    > COUNT(*) AS total_reviews
+    > FROM reviews_serde AS r
+    > JOIN products_serde AS p ON r.parent_asin = p.parent_asin
+    > WHERE lower(p.title) LIKE '%shampoo%'
+    > GROUP BY p.parent_asin, p.title
+    > ORDER BY total_reviews DESC
+    > LIMIT 1;
+WARNING: Hive-on-MR is deprecated in Hive 2 and may not be available in the future versions. Consider using a different execution engine (i.e. spark, tez) or using Hive 1.X releases.
+Query ID = root_20260207152728_bbb5713f-6e94-4b3c-b36f-ed6b1d4803f2
+Total jobs = 3
+Launching Job 1 out of 3
+Number of reduce tasks not specified. Estimated from input data size: 55
+In order to change the average load for a reducer (in bytes):
+  set hive.exec.reducers.bytes.per.reducer=<number>
+In order to limit the maximum number of reducers:
+  set hive.exec.reducers.max=<number>
+In order to set a constant number of reducers:
+  set mapreduce.job.reduces=<number>
+Job running in-process (local Hadoop)
+2026-02-07 15:27:31,889 Stage-1 map = 0%,  reduce = 0%
+2026-02-07 15:27:35,015 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:27:39,134 Stage-1 map = 4%,  reduce = 0%
+2026-02-07 15:27:40,191 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:27:46,306 Stage-1 map = 9%,  reduce = 0%
+2026-02-07 15:27:47,323 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:27:51,364 Stage-1 map = 13%,  reduce = 0%
+2026-02-07 15:27:52,379 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:28:01,459 Stage-1 map = 21%,  reduce = 0%
+2026-02-07 15:28:02,468 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:28:08,518 Stage-1 map = 26%,  reduce = 0%
+2026-02-07 15:28:09,538 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:28:13,577 Stage-1 map = 30%,  reduce = 0%
+2026-02-07 15:28:14,595 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:28:25,720 Stage-1 map = 40%,  reduce = 0%
+2026-02-07 15:28:26,728 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:28:37,827 Stage-1 map = 49%,  reduce = 0%
+2026-02-07 15:28:38,854 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:28:42,890 Stage-1 map = 53%,  reduce = 0%
+2026-02-07 15:28:43,912 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:28:48,026 Stage-1 map = 57%,  reduce = 0%
+2026-02-07 15:28:49,033 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:28:53,063 Stage-1 map = 60%,  reduce = 0%
+2026-02-07 15:28:54,070 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:28:58,099 Stage-1 map = 64%,  reduce = 0%
+2026-02-07 15:28:59,107 Stage-1 map = 100%,  reduce = 0%
+2026-02-07 15:29:10,239 Stage-1 map = 74%,  reduce = 0%
+2026-02-07 15:29:11,258 Stage-1 map = 100%,  reduce = 0%
+Ended Job = job_local1190600067_0001 with errors
+Error during job, obtaining debugging information...
+FAILED: Execution Error, return code 2 from org.apache.hadoop.hive.ql.exec.mr.MapRedTask
+MapReduce Jobs Launched: 
+Stage-Stage-1:  HDFS Read: 242407368336 HDFS Write: 0 FAIL
+Total MapReduce CPU Time Spent: 0 msec
+hive> DROP VIEW IF EXISTS reviews;
+OK
+Time taken: 0.076 seconds
+hive> DROP TABLE IF EXISTS reviews_raw;
+OK
+Time taken: 0.037 seconds
+hive> DROP VIEW IF EXISTS products;
+OK
+Time taken: 0.045 seconds
+hive> DROP TABLE IF EXISTS meta_raw;
+OK
+Time taken: 0.034 seconds
+hive> CREATE TABLE reviews_raw (line STRING);
+OK
+Time taken: 0.189 seconds
+hive> LOAD DATA INPATH '/input/beauty/Beauty_and_Personal_Care.jsonl' OVERWRITE INTO TABLE reviews_raw;
+FAILED: SemanticException Line 1:17 Invalid path ''/input/beauty/Beauty_and_Personal_Care.jsonl'': No files matching path hdfs://namenode:9000/input/beauty/Beauty_and_Personal_Care.jsonl
+hive> 
