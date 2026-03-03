@@ -8,5 +8,5 @@ projects
 │   ├── requirements.txt
 │   └── README.md                    
 └── E-Commerce-DMS/
-    |-- README.md
-    |-- e_commerce_database.sql
+    ├── README.md
+    ├── e_commerce_database.sql
