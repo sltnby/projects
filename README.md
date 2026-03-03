@@ -1,4 +1,4 @@
-bash```
+```
 Portfolio-Repository/
 ├── README.md
 ├── Shampoo-Sentiment-Analysis/
